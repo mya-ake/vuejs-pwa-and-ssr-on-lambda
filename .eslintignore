@@ -1,0 +1,4 @@
+dist/**
+dev/**
+webpack.*
+*config.*
