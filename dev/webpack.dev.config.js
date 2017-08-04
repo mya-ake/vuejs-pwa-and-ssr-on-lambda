@@ -3,11 +3,9 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const SRC_PATH = './../src';
 
-console.log(__dirname);
-console.log(path.join(SRC_PATH, 'app.js'));
 const config = {
   entry: {
-    app: path.join(SRC_PATH, 'app.js'),
+    app: path.resolve(__dirname, '../src/app.js'),
   },
   output: {
     path: path.join(__dirname, '..', 'dist'),

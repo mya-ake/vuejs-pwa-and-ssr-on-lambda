@@ -32,6 +32,7 @@ const hotMiddleware = webpackHotMiddleware(compiler, {
 compiler.plugin('compilation', (compilation) => {
   console.log('complilation');
   compilation.plugin('html-webpack-plugin-after-emit', (data, callback) => {
+    console.log('after-emit');
     hotMiddleware.publish({ action: 'reload' });
     callback();
   });
