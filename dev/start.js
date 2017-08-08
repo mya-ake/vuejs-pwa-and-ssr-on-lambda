@@ -35,9 +35,7 @@ const hotMiddleware = webpackHotMiddleware(compiler, {
 });
 
 compiler.plugin('compilation', (compilation) => {
-  console.log('complilation');
   compilation.plugin('html-webpack-plugin-after-emit', (data, callback) => {
-    console.log('after-emit');
     hotMiddleware.publish({ action: 'reload' });
     callback();
   });
@@ -49,10 +47,6 @@ app.use(hotMiddleware);
 
 /** execute */
 removeDistFiles();
-
-
-// myExecSync('webpack -d');
-// myExecSync('webpack --watch -d & browser-sync start --config bs-config.js');
 
 var uri = 'http://localhost:' + port
 
