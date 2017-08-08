@@ -1,6 +1,7 @@
 const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 
 const SRC_PATH = './../src';
 
@@ -10,7 +11,7 @@ const config = {
   },
   output: {
     path: path.join(__dirname, '..', 'dist'),
-    filename: '[name].[hash].js',
+    filename: '[name].js',
     publicPath: '/',
   },
   module: {
@@ -29,6 +30,7 @@ const config = {
       inject: true,
     }),
     new webpack.HotModuleReplacementPlugin(),
+    new FriendlyErrorsPlugin()
   ],
   devtool: '#cheap-eval-source-map',
 };
