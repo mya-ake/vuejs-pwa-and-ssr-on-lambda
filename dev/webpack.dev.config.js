@@ -1,3 +1,4 @@
+const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
@@ -27,6 +28,7 @@ const config = {
       template: path.join('src', 'index.html'),
       inject: true,
     }),
+    new webpack.HotModuleReplacementPlugin(),
   ],
   devtool: '#cheap-eval-source-map',
 };

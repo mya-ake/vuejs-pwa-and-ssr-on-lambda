@@ -1,5 +1,4 @@
 const webpack = require('webpack');
-const merge = require('webpack-merge');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 const connectHistoryApiFallback = require('connect-history-api-fallback');
@@ -15,6 +14,12 @@ if (!process.env.NODE_ENV) {
   process.env.NODE_ENV = config.dev.NODE_ENV;
 }
 const port = config.dev.PORT;
+
+// add hot-reload related code to entry chunks
+Object.keys(webpackConfig.entry).forEach((name) => {
+  const entry = path.resolve(__dirname, './dev-client');
+  webpackConfig.entry[name] = [entry].concat(webpackConfig.entry[name])
+})
 
 const app = express();
 const compiler = webpack(webpackConfig)
