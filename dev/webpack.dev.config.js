@@ -12,6 +12,7 @@ const resolve = (dir) => {
 const config = {
   entry: {
     app: path.resolve(__dirname, '../src/app.js'),
+    styles: path.resolve(__dirname, '../src/styles.js'),
   },
   output: {
     path: path.join(__dirname, '..', 'dist'),
@@ -34,7 +35,11 @@ const config = {
       },
       {
         test: /\.vue$/,
-        loader: 'vue-loader',
+        use: ['vue-loader'],
+      },
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader']
       },
     ],
   },
