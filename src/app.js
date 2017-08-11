@@ -1,7 +1,8 @@
 import Vue from 'vue';
+import VueRouter from 'vue-router';
 import App from './App.vue';
 
-document.querySelector('#app-root-js').textContent = 'insert from JS';
+Vue.use(VueRouter);
 
 new Vue({
   el: '#app-root',
