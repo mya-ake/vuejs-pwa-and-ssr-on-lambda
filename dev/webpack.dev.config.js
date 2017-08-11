@@ -22,9 +22,9 @@ const config = {
   resolve: {
     extensions: ['.js', '.vue', '.json'],
     alias: {
-      '@': resolve('src'),
-      'vue$': 'vue/dist/vue.runtime.esm.js'
-    }
+      '~': resolve('src'),
+      'vue$': 'vue/dist/vue.runtime.esm.js',
+    },
   },
   module: {
     rules: [
@@ -41,12 +41,25 @@ const config = {
             require('autoprefixer')({
               browsers: ['IE 9', 'IE 10', 'IE 11', 'last 2 versions'],
             }),
-          ]
+          ],
         },
       },
       {
         test: /\.css$/,
         use: ['style-loader', 'css-loader']
+      },
+      {
+        test: /\.scss$/,
+        use: [
+          'style-loader',
+          'css-loader',
+          {
+            loader: 'sass-loader',
+            options: {
+              includePaths: [resolve('node_modules')]
+            },
+          }
+        ],
       },
     ],
   },

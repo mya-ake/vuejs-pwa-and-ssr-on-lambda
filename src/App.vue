@@ -1,24 +1,21 @@
 <template>
-  <div>
-    <div>
-      <span>insert from Vue.js.</span>
-    </div>
-    <div>
-      <span class="data-text">{{text}}</span>
-    </div>
-  </div>
+  <default-layout></default-layout>
 </template>
 <script>
+import defaultLayout from '~/layouts/default.vue';
+import {MDCRipple, MDCRippleFoundation, util} from '@material/ripple';
+
 export default {
-  data () {
-    return {
-      text: 'insert from Vue.js data.',
-    };
+  mounted () {
+    MDCRipple.attachTo(document.querySelector('.mdc-fab'));
+  },
+  components: {
+    defaultLayout,
   },
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 
 $c-vue: #42b983;
 

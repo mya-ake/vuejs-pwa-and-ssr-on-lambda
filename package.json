@@ -10,8 +10,15 @@
     "start": "node dev/start.js"
   },
   "dependencies": {
+    "@material/elevation": "^0.1.11",
+    "@material/fab": "^0.3.13",
+    "@material/ripple": "^0.8.2",
+    "@material/theme": "^0.1.7",
+    "@material/toolbar": "^0.4.4",
+    "@material/typography": "^0.3.0",
     "express": "^4.15.3",
     "friendly-errors-webpack-plugin": "^1.6.1",
+    "material-components-web": "^0.17.0",
     "normalize.css": "^7.0.0",
     "vue": "^2.4.2",
     "vue-router": "^2.7.0"
