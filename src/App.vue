@@ -18,8 +18,12 @@ export default {
 }
 </script>
 
-<style scoped>
-  .data-text {
-    color: #42b983;
-  }
+<style lang="scss" scoped>
+
+$c-vue: #42b983;
+
+.data-text {
+  color: $c-vue;
+}
+
 </style>

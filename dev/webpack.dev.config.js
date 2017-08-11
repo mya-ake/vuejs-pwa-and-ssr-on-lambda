@@ -35,7 +35,14 @@ const config = {
       },
       {
         test: /\.vue$/,
-        use: ['vue-loader'],
+        loader: 'vue-loader',
+        options: {
+          postcss: [
+            require('autoprefixer')({
+              browsers: ['IE 9', 'IE 10', 'IE 11', 'last 2 versions'],
+            }),
+          ]
+        },
       },
       {
         test: /\.css$/,
@@ -45,7 +52,7 @@ const config = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      filename:'index.html',
+      filename: 'index.html',
       template: path.join('src', 'index.html'),
       inject: true,
     }),
