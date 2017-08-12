@@ -1,15 +1,18 @@
 <template>
-  <div class="container">
+  <section class="container">
 
     <global-header></global-header>
 
     <main class="contents">
-      <div>
-        <span>insert from Vue.js.</span>
-      </div>
-      <div>
-        <span class="data-text">{{text}}</span>
-      </div>
+      <section>
+        <h2 class="screen-reader-text">メモのリスト</h2>
+
+        <ul class="mdc-list">
+          <li v-for="(memo, index) in memos" v-bind:key="'memo-' + index" class="mdc-list-item" data-mdc-auto-init="MDCRipple">
+            <span v-text="memo.title"></span>
+          </li>
+        </ul>
+      </section>
 
       <aside>
         <button class="mdc-fab material-icons app-fab--absolute" aria-label="Add" data-mdc-auto-init="MDCRipple">
@@ -23,22 +26,38 @@
 
     <global-footer class="footer"></global-footer>
 
-  </div>
+  </section>
 </template>
 
 <script>
 import globalHeader from '~/parts/global-header.vue';
 import globalFooter from '~/parts/global-footer.vue';
 
+import Memo from '~/models/Memo';
+
 export default {
-  data() {
+  data () {
     return {
-      text: 'insert from Vue.js data.',
+      memos: [],
     };
   },
   components: {
     globalHeader,
     globalFooter,
+  },
+  created () {
+    this.memos.push(new Memo({
+      title: 'test memo 1',
+      body: 'ここにテキスト。',
+    }));
+    this.memos.push(new Memo({
+      title: 'test memo 2',
+      body: 'ここにテキスト。',
+    }));
+    this.memos.push(new Memo({
+      title: 'test memo 3',
+      body: 'ここにテキスト。',
+    }));
   },
 }
 </script>

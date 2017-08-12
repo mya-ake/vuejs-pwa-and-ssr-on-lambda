@@ -12,6 +12,7 @@
   "dependencies": {
     "@material/elevation": "^0.1.11",
     "@material/fab": "^0.3.13",
+    "@material/list": "^0.2.14",
     "@material/ripple": "^0.8.2",
     "@material/theme": "^0.1.7",
     "@material/toolbar": "^0.4.4",
