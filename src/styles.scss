@@ -1,6 +1,4 @@
-$mdc-theme-primary: #35495E;
-$mdc-theme-accent: #42b983;
-$mdc-theme-background: #fff;
+@import '_variables';
 
 @import '@material/theme/mdc-theme';
 @import '@material/toolbar/mdc-toolbar';
@@ -8,3 +6,5 @@ $mdc-theme-background: #fff;
 @import '@material/fab/mdc-fab';
 @import '@material/ripple/mdc-ripple';
 @import '@material/list/mdc-list';
+@import '@material/textfield/mdc-textfield';
+@import '@material/button/mdc-button';

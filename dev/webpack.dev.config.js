@@ -57,7 +57,10 @@ const config = {
           {
             loader: 'sass-loader',
             options: {
-              includePaths: [resolve('node_modules')]
+              includePaths: [
+                resolve('src/scss'),
+                resolve('node_modules'),
+              ]
             },
           }
         ],

@@ -10,10 +10,13 @@
     "start": "node dev/start.js"
   },
   "dependencies": {
+    "@material/button": "^0.3.11",
     "@material/elevation": "^0.1.11",
     "@material/fab": "^0.3.13",
+    "@material/form-field": "^0.2.11",
     "@material/list": "^0.2.14",
     "@material/ripple": "^0.8.2",
+    "@material/textfield": "^0.3.3",
     "@material/theme": "^0.1.7",
     "@material/toolbar": "^0.4.4",
     "@material/typography": "^0.3.0",
