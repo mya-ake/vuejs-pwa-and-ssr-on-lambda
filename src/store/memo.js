@@ -16,8 +16,8 @@ const getters = {
 };
 
 const mutations = {
-  [TYPES.PUSH](argState, memo) {
-    argState.memoManager.push(memo);
+  [TYPES.PUSH](state, memo) {
+    state.memoManager.push(memo);
   },
 };
 
