@@ -43,7 +43,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import './../scss/_variables.scss';
 
 .form {
   margin-top: 12px;
@@ -55,7 +54,7 @@ export default {
   top: 0.7rem;
   right: 0.4rem;
   z-index: 5;
-  color: $c-toolbar-text;
+  color: #fff;
   font-weight: bold;
   font-size: 1.15rem;
 }
