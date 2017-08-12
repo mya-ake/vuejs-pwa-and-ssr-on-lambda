@@ -24,6 +24,7 @@
 
 <script>
 import { MDCSnackbar } from '@material/snackbar';
+import { MDCRipple } from '@material/ripple';
 import Memo from '~/models/Memo';
 
 export default {
@@ -42,6 +43,7 @@ export default {
   },
   mounted() {
     this.snackbar = MDCSnackbar.attachTo(document.querySelector('.mdc-snackbar'));
+    MDCRipple.attachTo(document.querySelector('.mdc-button'));
   },
   destroyed() {
     this.$store.dispatch('control/setShowAddButton', true);
