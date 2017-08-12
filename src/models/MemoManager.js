@@ -31,4 +31,17 @@ export default class MemoManager {
     this.idCounter = this.idCounter + 1;
     return this.idCounter;
   }
+
+  toJSON() {
+    return JSON.stringify(this.memos);
+  }
+
+  static fromJSONString(jsonString) {
+    const memos = JSON.parse(jsonString);
+    const maxId = memos[memos.length - 1].id;
+    return new MemoManager({
+      memos,
+      idCounter: maxId,
+    });
+  }
 }

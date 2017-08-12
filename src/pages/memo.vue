@@ -29,9 +29,7 @@ import Memo from '~/models/Memo';
 export default {
   data() {
     const id = this.$route.params.id;
-
     const memo = isNaN(id) === true ? Memo.createNew() : this.$store.getters['memo/get'](id);
-    console.log(memo);
 
     return {
       memo,
@@ -53,6 +51,11 @@ export default {
       this.$store.dispatch('memo/save', this.memo)
         .then((memo) => {
           this.memo = memo;
+        })
+        .then(() => {
+          this.$store.dispatch('memo/saveLocal');
+        })
+        .then(() => {
           this.snackbar.show({
             message: '保存しました',
           });

@@ -6,8 +6,17 @@ const TYPES = Object.freeze({
   UPDATE: 'UPDATE',
 });
 
+const KEYS = Object.freeze({
+  MEMOS: 'memos',
+});
+
+const getMemoManager = () => {
+  const localMemos = window.localStorage.getItem(KEYS.MEMOS);
+  return localMemos === null ? new MemoManager({}) : MemoManager.fromJSONString(localMemos);
+};
+
 const stateObject = {
-  memoManager: new MemoManager({}),
+  memoManager: getMemoManager(),
 };
 
 const getters = {
@@ -43,6 +52,9 @@ const actions = {
       commit(mutationType, memo);
       resolve(memo);
     });
+  },
+  saveLocal({ state }) {
+    window.localStorage.setItem(KEYS.MEMOS, state.memoManager.toJSON());
   },
 };
 
