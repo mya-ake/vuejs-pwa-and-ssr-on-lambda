@@ -4,22 +4,15 @@
     <global-header></global-header>
 
     <main class="contents">
-      <section>
-        <h2 class="screen-reader-text">メモのリスト</h2>
 
-        <ul class="mdc-list">
-          <li v-for="(memo, index) in memos" v-bind:key="'memo-' + index" class="mdc-list-item" data-mdc-auto-init="MDCRipple">
-            <span v-text="memo.title"></span>
-          </li>
-        </ul>
-      </section>
+      <router-view></router-view>
 
       <aside>
-        <button class="mdc-fab material-icons app-fab--absolute" aria-label="Add" data-mdc-auto-init="MDCRipple">
+        <router-link to="/memos/new" class="mdc-fab material-icons app-fab--absolute" aria-label="Add" data-mdc-auto-init="MDCRipple">
           <span class="mdc-fab__icon">
             add
           </span>
-        </button>
+        </router-link>
       </aside>
 
     </main>
@@ -33,31 +26,10 @@
 import globalHeader from '~/parts/global-header.vue';
 import globalFooter from '~/parts/global-footer.vue';
 
-import Memo from '~/models/Memo';
-
 export default {
-  data () {
-    return {
-      memos: [],
-    };
-  },
   components: {
     globalHeader,
     globalFooter,
-  },
-  created () {
-    this.memos.push(new Memo({
-      title: 'test memo 1',
-      body: 'ここにテキスト。',
-    }));
-    this.memos.push(new Memo({
-      title: 'test memo 2',
-      body: 'ここにテキスト。',
-    }));
-    this.memos.push(new Memo({
-      title: 'test memo 3',
-      body: 'ここにテキスト。',
-    }));
   },
 }
 </script>
@@ -85,7 +57,8 @@ $c-vue: #42b983;
   bottom: 1rem;
 }
 
-.data-text {
-  color: $c-vue;
+.mdc-fab {
+  text-decoration: none;
 }
+
 </style>
