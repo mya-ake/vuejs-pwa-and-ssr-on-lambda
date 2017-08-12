@@ -1,5 +1,6 @@
 export default class Memo {
-  constructor({ title, body }) {
+  constructor({ id, title, body }) {
+    this.id = id;
     this.title = title;
     this.body = body;
   }

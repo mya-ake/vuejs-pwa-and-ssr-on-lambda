@@ -18,8 +18,6 @@ export default {
 <style lang="scss">
 
 body {
-  font-size: 1.6rem;
-  line-height: 1.6;
   backface-visibility: hidden;
   position: relative;
   font-feature-settings: "pkna" 1;

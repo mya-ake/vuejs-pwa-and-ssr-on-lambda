@@ -24,6 +24,7 @@ const config = {
     alias: {
       '~': resolve('src'),
       'vue$': 'vue/dist/vue.runtime.esm.js',
+      'vuex$': 'vuex/dist/vuex.esm.js',
     },
   },
   module: {
