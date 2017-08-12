@@ -4,4 +4,11 @@ export default class Memo {
     this.title = title;
     this.body = body;
   }
+
+  static createNew() {
+    return new Memo({
+      title: '',
+      body: '',
+    });
+  }
 }

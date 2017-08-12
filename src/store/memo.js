@@ -3,6 +3,7 @@ import MemoManager from '~/models/MemoManager';
 
 const TYPES = Object.freeze({
   PUSH: 'PUSH',
+  UPDATE: 'UPDATE',
 });
 
 const stateObject = {
@@ -10,6 +11,11 @@ const stateObject = {
 };
 
 const getters = {
+  get(state) {
+    return (id) => {
+      return state.memoManager.get(id);
+    };
+  },
   memos(state) {
     return state.memoManager.memos;
   },
@@ -19,16 +25,24 @@ const mutations = {
   [TYPES.PUSH](state, memo) {
     state.memoManager.push(memo);
   },
+  [TYPES.UPDATE](state, memo) {
+    state.memoManager.update(memo);
+  },
 };
 
 const actions = {
-  push({ commit, state }, { title, body }) {
-    const memo = new Memo({
-      id: state.memoManager.getNextId(),
-      title,
-      body,
+  save({ commit, state }, { id, title, body }) {
+    return new Promise((resolve) => {
+      const isCreate = typeof id === 'undefined';
+      const memo = new Memo({
+        id: isCreate === true ? state.memoManager.getNextId() : id,
+        title,
+        body,
+      });
+      const mutationType = isCreate === true ? TYPES.PUSH : TYPES.UPDATE;
+      commit(mutationType, memo);
+      resolve(memo);
     });
-    commit(TYPES.PUSH, memo);
   },
 };
 

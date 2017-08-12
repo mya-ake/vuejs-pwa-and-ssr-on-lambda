@@ -28,10 +28,10 @@ import Memo from '~/models/Memo';
 
 export default {
   data() {
-    const memo = new Memo({
-      title: '',
-      body: '',
-    });
+    const id = this.$route.params.id;
+
+    const memo = isNaN(id) === true ? Memo.createNew() : this.$store.getters['memo/get'](id);
+    console.log(memo);
 
     return {
       memo,
@@ -50,10 +50,13 @@ export default {
   },
   methods: {
     save() {
-      console.log(this.memo);
-      this.snackbar.show({
-        message: '保存しました',
-      });
+      this.$store.dispatch('memo/save', this.memo)
+        .then((memo) => {
+          this.memo = memo;
+          this.snackbar.show({
+            message: '保存しました',
+          });
+        });
     }
   },
 }
