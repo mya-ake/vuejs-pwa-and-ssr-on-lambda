@@ -5,6 +5,7 @@ import App from './App.vue';
 
 import routes from './router/routes';
 import moduleMemo from './store/memo';
+import moduleControl from './store/control';
 
 Vue.use(VueRouter);
 Vue.use(Vuex);
@@ -17,6 +18,7 @@ const router = new VueRouter({
 const store = new Vuex.Store({
   modules: {
     memo: moduleMemo,
+    control: moduleControl,
   },
 });
 

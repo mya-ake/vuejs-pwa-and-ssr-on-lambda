@@ -4,3 +4,13 @@
   </section>
 </template>
 
+<script>
+export default {
+  created() {
+    this.$store.dispatch('control/setShowAddButton', false);
+  },
+  destroyed() {
+    this.$store.dispatch('control/setShowAddButton', true);
+  },
+}
+</script>

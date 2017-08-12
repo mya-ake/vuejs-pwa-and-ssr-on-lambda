@@ -7,7 +7,7 @@
 
       <router-view></router-view>
 
-      <aside>
+      <aside v-show="isShowAddButton">
         <router-link to="/memos/new" class="mdc-fab material-icons app-fab--absolute" aria-label="Add" data-mdc-auto-init="MDCRipple">
           <span class="mdc-fab__icon">
             add
@@ -30,6 +30,11 @@ export default {
   components: {
     globalHeader,
     globalFooter,
+  },
+  computed: {
+    isShowAddButton () {
+      return this.$store.state.control.isShowAddButton;
+    },
   },
 }
 </script>
