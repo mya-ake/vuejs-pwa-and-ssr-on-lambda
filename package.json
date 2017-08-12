@@ -16,6 +16,7 @@
     "@material/form-field": "^0.2.11",
     "@material/list": "^0.2.14",
     "@material/ripple": "^0.8.2",
+    "@material/snackbar": "^0.3.2",
     "@material/textfield": "^0.3.3",
     "@material/theme": "^0.1.7",
     "@material/toolbar": "^0.4.4",

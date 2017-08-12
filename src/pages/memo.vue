@@ -1,20 +1,29 @@
 <template>
   <section>
     <h2 class="screen-reader-text">メモの編集画面</h2>
+
     <form class="form" v-on:submit.prevent="save">
       <div class="mdc-textfield  mdc-textfield--fullwidth">
-        <input v-model="memo.title" class="mdc-textfield__input" placeholder="タイトル" type="text" aria-label="タイトル">
+        <input v-model="memo.title" class="mdc-textfield__input" placeholder="タイトル" type="text" aria-label="タイトル" required>
       </div>
       <div class="mdc-textfield mdc-textfield--multiline mdc-textfield--fullwidth">
         <textarea v-model="memo.body" class="mdc-textfield__input" placeholder="メモ" rows="10" cols="40" aria-label="メモ"></textarea>
       </div>
       <button type="submit" class="button-save mdc-button">保存</button>
     </form>
+
+    <div class="mdc-snackbar mdc-snackbar--align-start" aria-live="assertive" aria-atomic="true" aria-hidden="true">
+      <div class="mdc-snackbar__text"></div>
+      <div class="mdc-snackbar__action-wrapper">
+        <button type="button" class="mdc-button mdc-snackbar__action-button"></button>
+      </div>
+    </div>
+
   </section>
 </template>
 
 <script>
-import { MDCTextfield, MDCTextfieldFoundation } from '@material/textfield';
+import { MDCSnackbar } from '@material/snackbar';
 import Memo from '~/models/Memo';
 
 export default {
@@ -26,24 +35,31 @@ export default {
 
     return {
       memo,
+      message: '',
+      snackbar: null,
     };
   },
   created() {
     this.$store.dispatch('control/setShowAddButton', false);
   },
+  mounted() {
+    this.snackbar = MDCSnackbar.attachTo(document.querySelector('.mdc-snackbar'));
+  },
   destroyed() {
     this.$store.dispatch('control/setShowAddButton', true);
   },
   methods: {
-    save () {
+    save() {
       console.log(this.memo);
+      this.snackbar.show({
+        message: '保存しました',
+      });
     }
   },
 }
 </script>
 
 <style lang="scss" scoped>
-
 .form {
   margin-top: 12px;
   padding: 0 12px;
@@ -58,5 +74,4 @@ export default {
   font-weight: bold;
   font-size: 1.15rem;
 }
-
 </style>
