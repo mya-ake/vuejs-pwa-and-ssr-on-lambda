@@ -1,6 +1,9 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Vuex from 'vuex';
+import 'normalize.css/normalize.css';
+import './styles.scss';
+
 import App from './App.vue';
 
 import routes from './router/routes';

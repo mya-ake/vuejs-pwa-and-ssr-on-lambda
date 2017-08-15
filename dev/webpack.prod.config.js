@@ -1,6 +1,7 @@
 const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const env = 'production';
 
@@ -11,7 +12,6 @@ const resolve = (dir) => {
 const config = {
   entry: {
     app: path.resolve(__dirname, '../src/app.js'),
-    styles: path.resolve(__dirname, '../src/styles.js'),
   },
   output: {
     path: path.join(__dirname, '..', 'dist'),
@@ -30,7 +30,6 @@ const config = {
     rules: [
       {
         test: /\.js$/,
-        // exclude: /node_modules/,
         include: [
           resolve('src'),
           resolve('node_modules/@material'),
@@ -50,27 +49,36 @@ const config = {
       },
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader']
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: ['css-loader']
+        }),
       },
       {
         test: /\.scss$/,
-        use: [
-          'style-loader',
-          'css-loader',
-          {
-            loader: 'sass-loader',
-            options: {
-              includePaths: [
-                resolve('src/scss'),
-                resolve('node_modules'),
-              ]
-            },
-          }
-        ],
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: [
+            'css-loader',
+            {
+              loader: 'sass-loader',
+              options: {
+                includePaths: [
+                  resolve('src/scss'),
+                  resolve('node_modules'),
+                ]
+              },
+            }
+          ]
+        }),
       },
     ],
   },
   plugins: [
+    new ExtractTextPlugin({
+      filename: 'styles.[contenthash].css',
+
+    }),
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: path.join('src', 'index.html'),
