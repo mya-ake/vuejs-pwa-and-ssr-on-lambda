@@ -3,8 +3,6 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 
-const SRC_PATH = './../src';
-
 const resolve = (dir) => {
   return path.join(__dirname, '..', dir)
 };
