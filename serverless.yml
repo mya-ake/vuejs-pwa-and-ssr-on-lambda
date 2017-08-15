@@ -1,0 +1,40 @@
+service: vuejs-pwa-and-ssr-on-lambda
+
+frameworkVersion: ">=1.19.0"
+
+provider:
+  name: aws
+  runtime: nodejs6.10
+  region: ap-northeast-1
+  stage: v1
+  profile: my
+
+package:
+  include:
+    - server/app.js
+    - dist/**
+  exclude:
+    - node_modules/**
+    - src/**
+    - dev/**
+    - config/**
+    - .**
+    - LICENSE
+    - README.md
+    - package.json
+    - yarn.lock
+    - webpack.**.js
+
+
+functions:
+  render:
+    handler: server/app.render
+    timeout: 120
+    memorySize: 128
+    events:
+      - http:
+          path: '/'
+          method: get
+      - http:
+          path: '{proxy+}'
+          method: get

@@ -7,7 +7,8 @@
   "license": "MIT",
   "scripts": {
     "build": "node dev/build.js",
-    "start": "node dev/start.js"
+    "start": "node dev/start.js",
+    "deploy:lambda": "sls deploy"
   },
   "dependencies": {
     "@material/base": "^0.2.3",
@@ -22,6 +23,7 @@
     "@material/theme": "^0.1.7",
     "@material/toolbar": "^0.4.4",
     "@material/typography": "^0.3.0",
+    "aws-serverless-express": "^3.0.2",
     "express": "^4.15.4",
     "material-components-web": "^0.17.0",
     "normalize.css": "^7.0.0",
