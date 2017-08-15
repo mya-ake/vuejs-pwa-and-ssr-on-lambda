@@ -60,7 +60,9 @@ const config = merge(baseConfig, {
       },
     }),
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': env
+      'process.env': {
+        'NODE_ENV': '"production"',
+      },
     }),
     // new webpack.optimize.UglifyJsPlugin({
     //   compress: {

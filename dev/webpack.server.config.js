@@ -24,6 +24,11 @@ const config = merge(baseConfig, {
   //   ],
   // }),
   plugins: [
+    new webpack.DefinePlugin({
+      'process.env': {
+        'NODE_ENV': '"production"',
+      },
+    }),
     new VueSSRServerPlugin()
   ],
   devtool: '#source-map',
