@@ -9,7 +9,7 @@ module.exports = {
   },
 
   extends: [
-    'airbnb-base',
+    // 'airbnb-base',
   ],
 
   rules: {
