@@ -1,7 +1,11 @@
 const webpack = require('webpack');
+const merge = require('webpack-merge');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const VueSSRClientPlugin = require('vue-server-renderer/client-plugin');
+
+const baseConfig = require('./webpack.base.config');
 
 const env = 'production';
 
@@ -9,55 +13,23 @@ const resolve = (dir) => {
   return path.join(__dirname, '..', dir)
 };
 
-const config = {
+const config = merge(baseConfig, {
   entry: {
-    app: path.resolve(__dirname, '../src/app.js'),
-  },
-  output: {
-    path: path.join(__dirname, '..', 'dist'),
-    filename: '[name].[hash].js',
-    publicPath: '/',
-  },
-  resolve: {
-    extensions: ['.js', '.vue', '.json'],
-    alias: {
-      '~': resolve('src'),
-      'vue$': 'vue/dist/vue.runtime.esm.js',
-      'vuex$': 'vuex/dist/vuex.esm.js',
-    },
+    app: path.resolve(__dirname, '../src/app-client.js'),
   },
   module: {
     rules: [
       {
-        test: /\.js$/,
-        include: [
-          resolve('src'),
-          resolve('node_modules/@material'),
-        ],
-        use: ['babel-loader'],
-      },
-      {
-        test: /\.vue$/,
-        loader: 'vue-loader',
-        options: {
-          postcss: [
-            require('autoprefixer')({
-              browsers: ['IE 9', 'IE 10', 'IE 11', 'last 2 versions'],
-            }),
-          ],
-        },
-      },
-      {
         test: /\.css$/,
         use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
+          fallback: 'vue-style-loader',
           use: ['css-loader']
         }),
       },
       {
         test: /\.scss$/,
         use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
+          fallback: 'vue-style-loader',
           use: [
             'css-loader',
             {
@@ -77,7 +49,6 @@ const config = {
   plugins: [
     new ExtractTextPlugin({
       filename: 'styles.[contenthash].css',
-
     }),
     new HtmlWebpackPlugin({
       filename: 'index.html',
@@ -89,16 +60,21 @@ const config = {
       },
     }),
     new webpack.DefinePlugin({
-      'process.env': env
+      'process.env.NODE_ENV': env
     }),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false
-      },
-      sourceMap: true
+    // new webpack.optimize.UglifyJsPlugin({
+    //   compress: {
+    //     warnings: false
+    //   },
+    //   sourceMap: true
+    // }),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: "manifest",
+      minChunks: Infinity
     }),
+    new VueSSRClientPlugin(),
   ],
   devtool: '#source-map',
-};
+});
 
 module.exports = config;

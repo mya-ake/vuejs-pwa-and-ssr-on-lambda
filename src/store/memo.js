@@ -11,8 +11,12 @@ const KEYS = Object.freeze({
 });
 
 const getMemoManager = () => {
-  const localMemos = window.localStorage.getItem(KEYS.MEMOS);
-  return localMemos === null ? new MemoManager({}) : MemoManager.fromJSONString(localMemos);
+  try {
+    const localMemos = window.localStorage.getItem(KEYS.MEMOS);
+    return localMemos === null ? new MemoManager({}) : MemoManager.fromJSONString(localMemos);
+  } catch (err) {
+    return new MemoManager({});
+  }
 };
 
 const stateObject = {

@@ -1,47 +1,22 @@
 const webpack = require('webpack');
+const merge = require('webpack-merge');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
+const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
+const VueSSRClientPlugin = require('vue-server-renderer/client-plugin');
+
+const baseConfig = require('./webpack.base.config');
 
 const resolve = (dir) => {
   return path.join(__dirname, '..', dir)
 };
 
-const config = {
+const config = merge(baseConfig, {
   entry: {
-    app: path.resolve(__dirname, '../src/app.js'),
-  },
-  output: {
-    path: path.join(__dirname, '..', 'dist'),
-    filename: '[name].[hash].js',
-    publicPath: '/',
-  },
-  resolve: {
-    extensions: ['.js', '.vue', '.json'],
-    alias: {
-      '~': resolve('src'),
-      'vue$': 'vue/dist/vue.runtime.esm.js',
-      'vuex$': 'vuex/dist/vuex.esm.js',
-    },
+    app: path.resolve(__dirname, '../src/app-client.js'),
   },
   module: {
     rules: [
-      {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        use: ['babel-loader'],
-      },
-      {
-        test: /\.vue$/,
-        loader: 'vue-loader',
-        options: {
-          postcss: [
-            require('autoprefixer')({
-              browsers: ['IE 9', 'IE 10', 'IE 11', 'last 2 versions'],
-            }),
-          ],
-        },
-      },
       {
         test: /\.css$/,
         use: ['style-loader', 'css-loader']
@@ -71,9 +46,14 @@ const config = {
       inject: true,
     }),
     new webpack.HotModuleReplacementPlugin(),
-    new FriendlyErrorsPlugin()
+    new FriendlyErrorsPlugin(),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: "manifest",
+      minChunks: Infinity
+    }),
+    new VueSSRClientPlugin()
   ],
   devtool: '#cheap-eval-source-map',
-};
+});
 
 module.exports = config;
