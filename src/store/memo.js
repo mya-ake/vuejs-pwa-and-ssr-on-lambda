@@ -30,7 +30,7 @@ const getters = {
       return state.memoManager.getMemo(id);
     };
   },
-  memos(state) {
+  getMemos(state) {
     return state.memoManager.memos;
   },
 };
