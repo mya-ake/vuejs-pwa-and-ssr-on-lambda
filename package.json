@@ -6,7 +6,7 @@
   "author": "t.shibuta <make.app.ts@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "build": "node dev/build.js",
+    "build": "node dev/build.js && npm run build:lambda",
     "build:lambda": "webpack --config ./dev/webpack.server.config.js",
     "start": "node dev/start.js",
     "deploy:lambda": "sls deploy",
