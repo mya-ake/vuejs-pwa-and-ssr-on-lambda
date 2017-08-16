@@ -8,7 +8,8 @@
   "scripts": {
     "build": "node dev/build.js && npm run build:lambda",
     "build:lambda": "webpack --config ./dev/webpack.server.config.js",
-    "start": "node dev/start.js",
+    "dev": "node dev/start.js",
+    "start": "node dev/local-server.js",
     "deploy:lambda": "sls deploy",
     "remove:lambda": "sls remove"
   },
