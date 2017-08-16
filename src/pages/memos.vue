@@ -19,9 +19,6 @@
 import Memo from '~/models/Memo';
 
 export default {
-  created() {
-    this.$store.dispatch('memo/init');
-  },
   computed: {
     memos () {
       return this.$store.getters['memo/getMemos'];

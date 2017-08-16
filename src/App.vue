@@ -8,6 +8,9 @@ import defaultLayout from '~/layouts/default.vue';
 import {MDCRipple} from '@material/ripple';
 
 export default {
+  created() {
+    this.$store.dispatch('memo/init');
+  },
   mounted () {
     MDCRipple.attachTo(document.querySelector('.mdc-fab'));
   },
