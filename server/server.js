@@ -2,25 +2,25 @@
 
 const path = require('path');
 const express = require('express');
-const awsServerlessExpressMiddleware = require('aws-serverless-express/middleware');
-const { createBundleRenderer } = require('vue-server-renderer')
-// const serverBundle = require('./../dist/vue-ssr-server-bundle.json');
+// const awsServerlessExpressMiddleware = require('aws-serverless-express/middleware');
+const { createBundleRenderer } = require('vue-server-renderer');
+const serverBundle = require('./../dist/vue-ssr-server-bundle.json');
+const template = require('fs').readFileSync('./server/index.html', 'utf-8');
 const clientManifest = require('./../dist/vue-ssr-client-manifest.json');
-const renderer = createBundleRenderer(path.resolve(__dirname, '../dist/vue-ssr-server-bundle.json'), {
+
+const renderer = createBundleRenderer(serverBundle, {
   runInNewContext: false,
-  template: require('fs').readFileSync('./server/index.html', 'utf-8'),
+  template,
   clientManifest,
 });
-// const renderer = require('vue-server-renderer').createRenderer({
-//   template: require('fs').readFileSync('./server/index.html', 'utf-8'),
-// });
 
-const appServer = express();
-appServer.use(awsServerlessExpressMiddleware.eventContext());
+const app = express();
+// app.use(awsServerlessExpressMiddleware.eventContext());
 
-appServer.get(['/*.js', '/*.css'], (req, res, next) => {
+
+app.get(['/*.js', '/*.css', '/*.js.map', '/*.css.map'], (req, res, next) => {
   const fileName = req.originalUrl;
-  console.log(fileName);
+  console.log(`static: ${fileName}`);
   const root = fileName.startsWith('/node_modules/') ? '.' : 'dist';
   res.header('Cache-Control', 'max-age=86400');
   res.sendFile(fileName, { root: root }, (err) => {
@@ -30,8 +30,9 @@ appServer.get(['/*.js', '/*.css'], (req, res, next) => {
   });
 });
 
-appServer.get('*', (req, res) => {
+app.get('*', (req, res) => {
   const context = { url: req.url };
+  console.log(`html: ${req.url}`);
 
   renderer.renderToString(context, (err, html) => {
     if (err) {
@@ -48,7 +49,7 @@ appServer.get('*', (req, res) => {
 });
 
 const port = 4080;
-const server = appServer.listen(port, () => {
+const server = app.listen(port, () => {
   console.log(`listening: http://localhost:${port}`);
 });
 

@@ -8,7 +8,7 @@ export default (context) => {
     router.onReady(() => {
       const matchedComponents = router.getMatchedComponents();
       if (!matchedComponents.length) {
-        reject({ code: 404 });
+        reject({ code: 404, url: context.url });
       }
       Promise.all(matchedComponents.map((Component) => {
         if (Component.asyncData) {
