@@ -2,7 +2,6 @@
 
 const path = require('path');
 const express = require('express');
-// const awsServerlessExpressMiddleware = require('aws-serverless-express/middleware');
 const { createBundleRenderer } = require('vue-server-renderer');
 const serverBundle = require('./../dist/vue-ssr-server-bundle.json');
 const template = require('fs').readFileSync('./server/index.html', 'utf-8');
@@ -15,7 +14,14 @@ const renderer = createBundleRenderer(serverBundle, {
 });
 
 const app = express();
-// app.use(awsServerlessExpressMiddleware.eventContext());
+app.use((req, res, next) => {
+  res.removeHeader('x-powered-by');
+  res.header('no-cache', 'Set-Cookie');
+  res.header('x-xss-protection', '1; mode=block');
+  res.header('x-frame-options', 'DENY');
+  res.header('x-content-type-options', 'nosniff');
+  next();
+});
 
 
 app.get(['/*.js', '/*.css', '/*.js.map', '/*.css.map'], (req, res, next) => {
@@ -31,6 +37,7 @@ app.get(['/*.js', '/*.css', '/*.js.map', '/*.css.map'], (req, res, next) => {
 });
 
 app.get('*', (req, res) => {
+  res.header('content-type', 'text/html');
   const context = { url: req.url };
   console.log(`html: ${req.url}`);
 
@@ -49,6 +56,5 @@ app.get('*', (req, res) => {
 });
 
 module.exports = {
-  app
+  app,
 };
-

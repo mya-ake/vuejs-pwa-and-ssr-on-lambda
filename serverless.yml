@@ -11,12 +11,15 @@ provider:
 
 package:
   include:
-    - server/app.js
+    - server/**
     - dist/**
+    - node_modules/**/**.js
+    - node_modules/**/**.json
   exclude:
     - node_modules/**
     - src/**
     - dev/**
+    - local/**
     - config/**
     - .**
     - LICENSE
