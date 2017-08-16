@@ -23,7 +23,7 @@ export default class MemoManager {
     this.memos[index] = memo;
   }
 
-  get(id) {
+  getMemo(id) {
     return this.memos[this.mapIdIndex[id]];
   }
 

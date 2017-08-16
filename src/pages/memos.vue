@@ -19,9 +19,13 @@
 import Memo from '~/models/Memo';
 
 export default {
+  created() {
+    this.$store.dispatch('memo/init');
+  },
   computed: {
     memos () {
-      return this.$store.getters['memo/memos'];
+      const memos = this.$store.getters['memo/memos'];
+      return 'length' in memos ? memos : [];
     },
   },
 }

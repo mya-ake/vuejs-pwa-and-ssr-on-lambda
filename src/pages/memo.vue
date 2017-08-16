@@ -29,11 +29,8 @@ import Memo from '~/models/Memo';
 
 export default {
   data() {
-    const id = this.$route.params.id;
-    const memo = isNaN(id) === true ? Memo.createNew() : this.$store.getters['memo/get'](id);
-
     return {
-      memo,
+      memo: Memo.createNew(),
       message: '',
       snackbar: null,
     };
@@ -42,6 +39,10 @@ export default {
     this.$store.dispatch('control/setShowAddButton', false);
   },
   mounted() {
+    const id = this.$route.params.id;
+    const memo = isNaN(id) === true ? Memo.createNew() : this.$store.getters['memo/getMemo'](id);
+    this.memo = memo;
+
     this.snackbar = MDCSnackbar.attachTo(document.querySelector('.mdc-snackbar'));
     MDCRipple.attachTo(document.querySelector('.mdc-button'));
   },

@@ -4,6 +4,7 @@ import MemoManager from '~/models/MemoManager';
 const TYPES = Object.freeze({
   PUSH: 'PUSH',
   UPDATE: 'UPDATE',
+  INIT: 'INIT',
 });
 
 const KEYS = Object.freeze({
@@ -19,14 +20,14 @@ const getMemoManager = () => {
   }
 };
 
-const stateObject = {
+const stateObject = () => ({
   memoManager: getMemoManager(),
-};
+});
 
 const getters = {
-  get(state) {
+  getMemo(state) {
     return (id) => {
-      return state.memoManager.get(id);
+      return state.memoManager.getMemo(id);
     };
   },
   memos(state) {
@@ -41,9 +42,15 @@ const mutations = {
   [TYPES.UPDATE](state, memo) {
     state.memoManager.update(memo);
   },
+  [TYPES.INIT](state, memoManager) {
+    state.memoManager = memoManager;
+  },
 };
 
 const actions = {
+  init({ commit }) {
+    commit(TYPES.INIT, getMemoManager());
+  },
   save({ commit, state }, { id, title, body }) {
     return new Promise((resolve) => {
       const isCreate = typeof id === 'undefined';

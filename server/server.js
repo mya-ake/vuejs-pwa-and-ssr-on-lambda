@@ -36,10 +36,14 @@ appServer.get('*', (req, res) => {
   renderer.renderToString(context, (err, html) => {
     if (err) {
       console.log(err);
-      res.status(500).end('Internal Server Error');
-      return;
+      if (err.code === 404) {
+        res.status(404).end('Page not found')
+      } else {
+        res.status(500).end('Internal Server Error')
+      }
+    } else {
+      res.end(html)
     }
-    res.end(html)
   });
 });
 
