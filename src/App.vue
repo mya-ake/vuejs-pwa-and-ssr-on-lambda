@@ -1,7 +1,5 @@
 <template>
-  <div id="app-root">
-    <default-layout></default-layout>
-  </div>
+  <default-layout></default-layout>
 </template>
 <script>
 import defaultLayout from '~/layouts/default.vue';

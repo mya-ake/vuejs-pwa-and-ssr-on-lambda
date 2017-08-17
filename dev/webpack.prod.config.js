@@ -17,6 +17,9 @@ const config = merge(baseConfig, {
   entry: {
     app: path.resolve(__dirname, '../src/app-client.js'),
   },
+  output: {
+    filename: '[name].[chunkhash].js',
+  },
   module: {
     rules: [
       {
@@ -56,6 +59,14 @@ const config = merge(baseConfig, {
       inject: true,
       minify: {
         removeComments: true,
+        collapseWhitespace: true,
+      },
+    }),
+    new HtmlWebpackPlugin({
+      filename: '../server/index.template.html',
+      template: path.join('src', 'index.html'),
+      inject: false,
+      minify: {
         collapseWhitespace: true,
       },
     }),
