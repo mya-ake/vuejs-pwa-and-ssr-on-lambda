@@ -10,8 +10,8 @@
     "build:lambda": "webpack --config ./dev/webpack.server.config.js",
     "dev": "node dev/start.js",
     "start": "node dev/local-server.js",
-    "deploy:lambda": "sls deploy",
-    "remove:lambda": "sls remove"
+    "deploy:lambda": "sls deploy --stage v1",
+    "remove:lambda": "sls remove --stage v1"
   },
   "dependencies": {
     "@material/base": "^0.2.3",
@@ -26,7 +26,6 @@
     "@material/theme": "^0.1.7",
     "@material/toolbar": "^0.4.4",
     "@material/typography": "^0.3.0",
-    "aws-serverless-express": "^3.0.2",
     "express": "^4.15.4",
     "material-components-web": "^0.17.0",
     "normalize.css": "^7.0.0",

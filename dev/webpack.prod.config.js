@@ -19,6 +19,7 @@ const config = merge(baseConfig, {
   },
   output: {
     filename: '[name].[chunkhash].js',
+    // publicPath: '/v1/',   // リソースに階層が必要な場合設定する
   },
   module: {
     rules: [
