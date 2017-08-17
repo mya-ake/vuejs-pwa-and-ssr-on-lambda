@@ -38,6 +38,7 @@ app.get(['/*.js', '/*.css', '/*.js.map', '/*.css.map'], (req, res, next) => {
 
 app.get('*', (req, res) => {
   res.header('content-type', 'text/html');
+  res.header('Cache-Control', 'max-age=600');
   const context = { url: req.url };
   console.log(`html: ${req.url}`);
 
