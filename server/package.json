@@ -1,0 +1,11 @@
+{
+  "name": "vuejs-pwa-and-ssr-on-lambda-server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "aws-serverless-express": "^3.0.2",
+    "express": "^4.15.4",
+    "vue-server-renderer": "^2.4.2"
+  }
+}
