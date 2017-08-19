@@ -9,9 +9,8 @@ const myExecSync = (command) => {
 };
 
 const removeDistFiles = () => {
-  del.sync(['dist/**']);
+  del.sync(['dist/**', '!dist']);
 };
-
 
 module.exports = {
   myExecSync,
