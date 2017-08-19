@@ -7,13 +7,14 @@ provider:
   name: aws
   runtime: nodejs6.10
   region: ap-northeast-1
-  stage: v1
+  stage: ${self:custom.stage}
   profile: my
   apiKeys:
-    - ${self:custom.name}-${opt:stage}
+    - ${self:custom.name}-${self:custom.stage}
 
 custom:
   name: vuejs-pwa-and-ssr-on-lambda
+  stage: v1
 
 package:
   include:
@@ -21,6 +22,7 @@ package:
     - server/**/**.json
     - server/index.template.html
     - dist/**
+    - '!dist/favicons/**'
   exclude:
     - node_modules/**
     - src/**

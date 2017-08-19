@@ -24,11 +24,18 @@ app.use((req, res, next) => {
 });
 
 
-app.get(['/*.js', '/*.css', '/*.js.map', '/*.css.map'], (req, res, next) => {
+app.use('/favicons/', express.static('dist/favicons', {
+  index: false,
+  setHeaders: (res, path, stat) => {
+    res.header('Cache-Control', 'max-age=86400');
+  },
+}));
+
+app.get(['/*.js', '/*.css', '/*.js.map', '/*.css.map', '/manifest.json'], (req, res, next) => {
   const fileName = req.originalUrl;
+  const root = 'dist';
   console.log(`static: ${fileName}`);
-  const root = fileName.startsWith('/node_modules/') ? '.' : 'dist';
-  res.header('Cache-Control', 'max-age=86400');
+  res.header('Cache-Control', 'max-age=60');
   res.sendFile(fileName, { root: root }, (err) => {
     if (err) {
       next(err);
@@ -38,7 +45,7 @@ app.get(['/*.js', '/*.css', '/*.js.map', '/*.css.map'], (req, res, next) => {
 
 app.get('*', (req, res) => {
   res.header('content-type', 'text/html');
-  res.header('Cache-Control', 'max-age=600');
+  res.header('Cache-Control', 'max-age=60');
   const context = { url: req.url };
   console.log(`html: ${req.url}`);
 
