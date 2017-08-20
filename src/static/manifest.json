@@ -5,7 +5,7 @@
 	"short_name": "Vue.js Memos",
 	"theme_color": "#42b983",
 	"background_color": "#fff",
-	"start_url": "https://vuejs-pwa-ssr.mya-ake.org/",
+	"start_url": "./",
 	"display": "standalone",
 	"icons": [
 		{
