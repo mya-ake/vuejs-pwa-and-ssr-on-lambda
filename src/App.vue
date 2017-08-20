@@ -39,6 +39,13 @@ body {
   }
 }
 
+a {
+  color: $c-vue;
+  &:hover {
+    color: $c-vue-dark;
+  }
+}
+
 input,
 textarea,
 a,
