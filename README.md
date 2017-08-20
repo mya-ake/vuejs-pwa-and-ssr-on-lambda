@@ -40,4 +40,11 @@ Vue Router や Vuex も利用。
 
 デプロイはServerless Frameworkを使って行っています。
 
-デプロイのパッケージには画像などは含まれていません。画像は別途手動でS3に上げてCloudFrontにてAPI GatewayとS3に向きを変えています。
+デプロイのパッケージには画像などは含まれていません。画像は別途手動でS3に上げてCloudFrontにてAPI GatewayとS3に向きを変えています。
+
+## DEMO
+
+簡単なメモアプリです。
+リストがあって、編集ができるというシンプルなものです。
+
+[https://vuejs-pwa-ssr.mya-ake.org](https://vuejs-pwa-ssr.mya-ake.org)
