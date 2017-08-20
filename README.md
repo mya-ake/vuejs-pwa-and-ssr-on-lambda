@@ -11,6 +11,8 @@ Vue.jsでPWA作って、LambdaでSSRすることを~~目標とする~~達成し�
 
 [https://vuejs.org/](https://vuejs.org/)
 
+Vue Router や Vuex も利用。
+
 
 ### vue-server-renderer
 
@@ -21,7 +23,7 @@ Vue.jsでPWA作って、LambdaでSSRすることを~~目標とする~~達成し�
 
 [https://workboxjs.org/](https://workboxjs.org/)
 
-※プロダクションビルド時のみ利用。
+※プロダクションビルド時のみ利用。
 
 
 ### Serverless Framework
@@ -31,3 +33,11 @@ Vue.jsでPWA作って、LambdaでSSRすることを~~目標とする~~達成し�
 
 ### Material Components Web
 [https://material.io/components/web/](https://material.io/components/web/)
+
+
+
+## デプロイについて
+
+デプロイはServerless Frameworkを使って行っています。
+
+デプロイのパッケージには画像などは含まれていません。画像は別途手動でS3に上げてCloudFrontにてAPI GatewayとS3に向きを変えています。
