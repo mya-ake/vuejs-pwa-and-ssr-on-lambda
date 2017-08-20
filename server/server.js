@@ -3,9 +3,9 @@
 const path = require('path');
 const express = require('express');
 const { createBundleRenderer } = require('vue-server-renderer');
-const serverBundle = require('./../dist/vue-ssr-server-bundle.json');
+const serverBundle = require('./../dist/assets/vue-ssr-server-bundle.json');
 const template = require('fs').readFileSync('./server/index.template.html', 'utf-8');
-const clientManifest = require('./../dist/vue-ssr-client-manifest.json');
+const clientManifest = require('./../dist/assets/vue-ssr-client-manifest.json');
 
 const renderer = createBundleRenderer(serverBundle, {
   runInNewContext: false,
@@ -31,7 +31,26 @@ app.use('/favicons/', express.static('dist/favicons', {
   },
 }));
 
-app.get(['/*.js', '/*.css', '/*.js.map', '/*.css.map', '/manifest.json'], (req, res, next) => {
+app.use('/assets/', express.static('dist/assets', {
+  index: false,
+  setHeaders: (res, path, stat) => {
+    res.header('Cache-Control', 'max-age=60');
+  },
+}));
+
+app.get(['/*.js', '/*.js.map'], (req, res, next) => {
+  const fileName = req.originalUrl;
+  const root = 'dist';
+  console.log(`static: ${fileName}`);
+  res.header('Cache-Control', 'max-age=0, no-cache');
+  res.sendFile(fileName, { root: root }, (err) => {
+    if (err) {
+      next(err);
+    }
+  });
+});
+
+app.get(['/*.js', '/*.js.map', '/manifest.json'], (req, res, next) => {
   const fileName = req.originalUrl;
   const root = 'dist';
   console.log(`static: ${fileName}`);

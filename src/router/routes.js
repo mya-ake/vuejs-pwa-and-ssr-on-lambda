@@ -10,4 +10,8 @@ export default [
     path: '/memos/:id',
     component: Memo,
   },
+  {
+    path: '*',
+    component: Memos,
+  },
 ];

@@ -9,9 +9,9 @@ const isProduction = process.env.NODE_ENV === 'production';
 
 const config = {
   output: {
-    path: path.join(__dirname, '..', 'dist'),
+    path: path.join(__dirname, '..', 'dist', 'assets'),
     filename: '[name].[hash].js',
-    publicPath: '/',
+    publicPath: '/assets/',
   },
   resolve: {
     extensions: ['.js', '.vue', '.json'],
@@ -47,7 +47,10 @@ const config = {
   },
   plugins: [
     new CopyWebpackPlugin([
-      { from: resolve('src/static') },
+      {
+        from: resolve('src/static'),
+        to: resolve('dist'),
+      },
     ]),
   ],
 };

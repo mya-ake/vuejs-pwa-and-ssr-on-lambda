@@ -4,6 +4,8 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const VueSSRClientPlugin = require('vue-server-renderer/client-plugin');
+const workboxPlugin = require('workbox-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const baseConfig = require('./webpack.base.config');
 
@@ -55,7 +57,7 @@ const config = merge(baseConfig, {
       filename: 'styles.[contenthash].css',
     }),
     new HtmlWebpackPlugin({
-      filename: 'index.html',
+      filename: path.join('..', 'index.html'),
       template: path.join('src', 'index.html'),
       inject: true,
       minify: {
@@ -64,7 +66,8 @@ const config = merge(baseConfig, {
       },
     }),
     new HtmlWebpackPlugin({
-      filename: '../server/index.template.html',
+      // filename: path.join('..', '..', 'server', 'index.template.html'),
+      filename: resolve('server/index.template.html'),
       template: path.join('src', 'index.html'),
       inject: false,
       minify: {
@@ -87,8 +90,19 @@ const config = merge(baseConfig, {
       name: "manifest",
     }),
     new VueSSRClientPlugin(),
+    new workboxPlugin({
+      globDirectory: 'dist',
+      globPatterns: ['**/*.{html,js,css}', 'favicons/**/*.{png,ico,xml,svg}'],
+      swDest: path.join('dist', 'sw.js'),
+    }),
+    new CopyWebpackPlugin([
+      {
+        from: resolve('src/static'),
+        to: resolve('dist'),
+      },
+    ]),
   ],
-  devtool: '#source-map',
+  devtool: '#hidden-source-map',
 });
 
 module.exports = config;
