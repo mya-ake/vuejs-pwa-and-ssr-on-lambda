@@ -1,7 +1,11 @@
 # vuejs-pwa-and-ssr-on-lambda
-Vue.jsでPWA作って、LambdaでSSRすることを目標とするリポジトリ
+Vue.jsでPWA作って、LambdaでSSRすることを~~目標とする~~達成したリポジトリ。
 
-## 使う予定のもの
+検証用で作ってるので無用なコメントアウトなど残ってるかもしれないです。
+あと、プロダクション用に作っているわけではないのでこのままは使わない方がいいです。
+
+
+## ~~使う予定~~使ったのもの
 
 ### Vue.js
 
@@ -17,8 +21,13 @@ Vue.jsでPWA作って、LambdaでSSRすることを目標とするリポジト�
 
 [https://workboxjs.org/](https://workboxjs.org/)
 
+※プロダクションビルド時のみ利用。
+
 
 ### Serverless Framework
 
 [https://serverless.com/](https://serverless.com/)
 
+
+### Material Components Web
+[https://material.io/components/web/](https://material.io/components/web/)
