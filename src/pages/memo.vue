@@ -81,6 +81,6 @@ export default {
   z-index: 5;
   color: #fff;
   font-weight: bold;
-  font-size: 1.15rem;
+  font-size: 1.13rem;
 }
 </style>
