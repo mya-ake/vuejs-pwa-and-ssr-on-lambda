@@ -15,29 +15,30 @@ router.onReady(() => {
 });
 
 if (window && 'serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/sw.js')
-      .then((registration) => {
-        console.log(registration);
-        if (registration.installing) {
-          console.info('installing');
-        } else if (registration.waiting) {
-          console.info('waiting');
-        } else if (registration.active) {
-          console.info('active');
-        }
-        return navigator.serviceWorker.ready;
-      })
-      .then((registration) => {
-        console.info(registration);
-        return registration.update();
-      })
-      .then(() => {
-        console.info('service worker update checked');
-      })
-      .catch((err) => {
-        console.info('service worker update failed');
-        console.error(err);
-      });
-  });
+  navigator.serviceWorker.register('/sw.js')
+    .then((registration) => {
+      console.log(registration);
+      if (registration.installing) {
+        console.info('service worker installing');
+      } else if (registration.waiting) {
+        console.info('service worker waiting');
+      } else if (registration.active) {
+        console.info('service worker active');
+      }
+      return registration;
+    })
+    .then((registration) => {
+      registration.addEventListener('updatefound', (evt) => {
+        console.info('service worker update found', evt);
+      }, false);
+      return registration;
+    })
+    .then((registration) => {
+      registration.update();
+      console.info('service worker update checked');
+      return registration;
+    })
+    .catch((err) => {
+      console.error('service worker install failed', err);
+    });
 }

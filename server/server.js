@@ -42,7 +42,7 @@ app.get(['/*.js', '/*.js.map'], (req, res, next) => {
   const fileName = req.originalUrl;
   const root = 'dist';
   console.log(`static: ${fileName}`);
-  res.header('Cache-Control', 'max-age=0, no-cache');
+  res.header('Cache-Control', 'no-store, no-cache, max-age=0');
   res.sendFile(fileName, { root: root }, (err) => {
     if (err) {
       next(err);
