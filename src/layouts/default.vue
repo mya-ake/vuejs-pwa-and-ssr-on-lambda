@@ -40,7 +40,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$c-vue: #42b983;
+@import './../scss/_variables.scss';
 
 .container {
   display: flex;
@@ -60,6 +60,10 @@ $c-vue: #42b983;
   position: fixed;
   right: 1rem;
   bottom: 1rem;
+  @media screen and (max-width: $bp-sp) {
+    right: 1.4rem;
+    bottom: 1.6rem;
+  }
 }
 
 .mdc-fab {

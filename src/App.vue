@@ -19,6 +19,7 @@ export default {
 </script>
 
 <style lang="scss">
+@import './scss/_variables.scss';
 
 body {
   backface-visibility: hidden;
@@ -27,7 +28,7 @@ body {
   letter-spacing: 0.04em;
   -webkit-font-smoothing: subpixel-antialiased;
   -moz-osx-font-smoothing: unset;
-  @media screen and (max-width: 480px) {
+  @media screen and (max-width: $bp-sp) {
     pointer-events: none;
   }
 }
